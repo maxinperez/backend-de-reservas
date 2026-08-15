@@ -7,7 +7,7 @@ const requiredEnvVars = ['PORT', 'NODE_ENV'];
 for (const varName of requiredEnvVars) {
   if (!process.env[varName]) {
     throw new Error(
-      `❌ Falta la variable de entorno requerida: ${varName}. Revisá tu archivo .env`
+      `Falta la variable de entorno requerida: ${varName}. Revisá tu archivo .env`
     );
   }
 }
