@@ -1,0 +1,33 @@
+{
+  "name": "backend-de-reservas",
+  "version": "1.0.0",
+  "description": "Un sistema backend de turnos con reservas en Node.js, Express y MongoDB.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxinperez/backend-de-reservas.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "reservas",
+    "turnos",
+    "backend"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxinperez/backend-de-reservas/issues"
+  },
+  "homepage": "https://github.com/maxinperez/backend-de-reservas#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
