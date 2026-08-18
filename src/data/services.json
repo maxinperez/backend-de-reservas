@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Corte de cabello",
+    "description": "Corte de cabello clásico con máquina y tijera",
+    "duration": 30,
+    "price": 3500,
+    "category": "peluquería",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Manicura completa",
+    "description": "Limado, cutícula y esmaltado tradicional",
+    "duration": 45,
+    "price": 4200,
+    "category": "manicura",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Masaje descontracturante",
+    "description": "Masaje de 50 minutos enfocado en espalda y cuello",
+    "duration": 50,
+    "price": 6800,
+    "category": "spa",
+    "available": false
+  }
+]
