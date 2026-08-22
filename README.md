@@ -2,7 +2,7 @@
 
 Sistema backend desarrollado en Node.js para la gestión de servicios de un sistema de turnos y reservas. Implementa una clase `ServiceManager` que permite administrar servicios con persistencia en un archivo JSON.
 
-Proyecto desarrollado como pre-entrega del curso de **Backend** de [CoderHouse](https://www.coderhouse.com/).
+Proyecto desarrollado en el curso de **Backend** de [CoderHouse](https://www.coderhouse.com/).
 
 ---
 
@@ -25,7 +25,7 @@ El proyecto expone una clase `ServiceManager` que permite crear, leer, actualiza
 1. Cloná el repositorio:
 
 ```bash
-git clone https://github.com/<tu-usuario>/backend-de-reservas.git
+git clone https://github.com/maxinperez/backend-de-reservas.git
 cd backend-de-reservas
 ```
 
