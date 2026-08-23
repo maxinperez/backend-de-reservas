@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/maxinperez/backend-de-reservas#readme",
   "dependencies": {
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
   }
 }

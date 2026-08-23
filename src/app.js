@@ -1,4 +1,12 @@
-export const app = {name : 'Sistema Backend: turnos y reservas.',
-    version : '1.0.0',
-    status : 'initial setup',
- };
+import express from 'express';
+
+export const app = express();
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        message: 'API: sistema de turnos y reservas'
+    })
+});
