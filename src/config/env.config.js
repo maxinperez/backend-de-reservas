@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
-const requiredEnvVars = ['PORT', 'NODE_ENV'];
+const requiredEnvVars = ['PORT', 'NODE_ENV', 'SERVICES_DATA_PATH'];
 // uso una lista por si despues debo agregar mas variables
 for (const varName of requiredEnvVars) {
   if (!process.env[varName]) {
@@ -13,4 +13,5 @@ for (const varName of requiredEnvVars) {
 }
 
 export const PORT = process.env.PORT;
+export const SERVICES_DATA_PATH = process.env.SERVICES_DATA_PATH;
 export const NODE_ENV = process.env.NODE_ENV;

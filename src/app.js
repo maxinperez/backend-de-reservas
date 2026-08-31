@@ -4,7 +4,7 @@ export const app = express();
 
 app.use(express.json());
 
-app.use()
+
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -14,7 +14,9 @@ app.get('/', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ error: err.message }); // 👈 SIEMPRE 500
+  const status = err.status || 500;
+  const message = err.message || 'Error interno del servidor';
+  return res.status(status).json({ error: message });
 });
 
 
