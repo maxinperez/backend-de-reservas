@@ -37,3 +37,63 @@ router.get('/', async (req, res, next) => {
         next(error);
     }
 })
+
+router.get('/:id', async (req, res, next) => {
+
+    const id = req.params.id;
+    const service = await serviceManager.getServiceById(id);
+
+    if(service === null){
+        return res.status(404).json({error: 'Servicio no encontrado'});
+    }
+    res.status(200).json(service);
+})
+
+
+router.post('/', async (req, res, next) => {
+    const serviceData = req.body;
+    try{
+        const newService = await serviceManager.addService(serviceData);
+        res.status(201).json(newService);
+    } catch (error){
+        // Si el error es por campos faltantes, devolvemos 400
+    if (error.message.startsWith('Service incompleto')) {
+      return res.status(400).json({ error: error.message });
+    }
+        next(error);
+    }
+})
+
+router.put('/:id', async (req, res, next) => {
+    try {
+    const id = req.params.id;
+    const updatedData = req.body;
+    const updatedService = await serviceManager.updateService(id, updatedData);
+
+    if (updatedService === null) {
+      return res.status(404).json({ error: `Servicio con id ${id} no encontrado` });
+    }
+    res.status(200).json(updatedService);
+    } catch(error){
+        next(error);
+    }
+
+})
+
+
+router.delete('/:id', async (req, res, next) => {
+
+    try {
+        const id = req.params.id;
+        const deletedService = await serviceManager.deleteService(id);
+
+        if (deletedService === null) {
+            return res.status(404).json({ error: `Servicio con id:${id} no encontrado` });
+        }
+        res.status(200).json({ message: `Servicio con id:${id} eliminado` });
+
+    } catch(error){
+        next(error);
+    }
+ })
+
