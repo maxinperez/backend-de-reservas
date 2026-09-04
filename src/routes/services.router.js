@@ -26,9 +26,14 @@ router.get('/', async (req, res, next) => {
             services = services.filter(s => s.category.toLowerCase() === category.toLowerCase());   
         }
 
-        if(available !== undefined){
+        if (available !== undefined) {
+            
+            if (available !== 'true' && available !== 'false') {
+                return res.status(400).json({ error: 'available debe ser "true" o "false"' });
+            }
+    
             const isAvailable = available === 'true';
-            services = services.filter(s => s.available === available);
+            services = services.filter(s => s.available === isAvailable);
         }
 
         res.status(200).json(services);
