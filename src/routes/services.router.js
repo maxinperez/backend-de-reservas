@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
         }
 
         if (available !== undefined) {
-            
+
             if (available !== 'true' && available !== 'false') {
                 return res.status(400).json({ error: 'available debe ser "true" o "false"' });
             }
@@ -45,14 +45,18 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
 
-    const id = req.params.id;
+    try{const id = req.params.id;
     const service = await serviceManager.getServiceById(id);
 
     if(service === null){
         return res.status(404).json({error: 'Servicio no encontrado'});
     }
     res.status(200).json(service);
+    } catch (error){
+        next(error);
+    }
 })
+    
 
 
 router.post('/', async (req, res, next) => {
