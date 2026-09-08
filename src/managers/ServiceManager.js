@@ -7,7 +7,7 @@ class ServiceManager {
     this.filePath = filePath;
   }
 
-  async getServices() {
+ async getServices() {
    try{
     const data = await fs.readFile(this.filePath, 'utf-8');    
     const services = JSON.parse(data);
@@ -69,6 +69,7 @@ class ServiceManager {
         }
 
         const updateService = {...services[old_service_index],...updatedData, id: services[old_service_index].id};
+        
         services[old_service_index] = updateService;
 
         await fs.writeFile(this.filePath, JSON.stringify(services, null, 2), 'utf-8');
