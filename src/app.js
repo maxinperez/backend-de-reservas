@@ -6,12 +6,7 @@ app.use(express.json());
 
 app.use('/api/services', servicesRouter);
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        message: 'API: sistema de turnos y reservas'
-    })
-});
+
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;
@@ -21,5 +16,5 @@ app.use((err, req, res, next) => {
 
 
 
-
+export default app;
 

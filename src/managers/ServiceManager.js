@@ -8,7 +8,8 @@ class ServiceManager {
   }
 
   async getServices() {
-   try{const data = await fs.readFile(this.filePath, 'utf-8');    
+   try{
+    const data = await fs.readFile(this.filePath, 'utf-8');    
     const services = JSON.parse(data);
     return services;
   } 

@@ -2,7 +2,10 @@ import { Router } from 'express';
 import ServiceManager from '../managers/ServiceManager.js';
 import { SERVICES_DATA_PATH } from '../config/env.config.js';
 
-
+/*
+importar controllers, en controller debo llamar a ServiceManager y hacer la logica de negocio, y en router solo debo llamar a los controllers.
+foto en wp.
+ */
 const router = Router();
 const serviceManager = new ServiceManager(SERVICES_DATA_PATH);
 
@@ -93,13 +96,13 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
 
     try {
-        const id = req.params.id;
-        const deletedService = await serviceManager.deleteService(id);
+        const sid = req.params.id;
+        const deletedService = await serviceManager.deleteService(sid);
 
         if (deletedService === null) {
-            return res.status(404).json({ error: `Servicio con id:${id} no encontrado` });
+            return res.status(404).json({ error: `Servicio con id:${sid} no encontrado` });
         }
-        res.status(200).json({ message: `Servicio con id:${id} eliminado` });
+        res.status(200).json({ message: `Servicio con id:${sid} eliminado` });
 
     } catch(error){
         next(error);

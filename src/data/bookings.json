@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "clientName": "María Gómez",
+    "clientEmail": "maria@example.com",
+    "date": "2026-09-10",
+    "time": "10:00",
+    "status": "confirmed",
+    "services": [
+      { "service": 1, "quantity": 2 },
+      { "service": 3, "quantity": 1 }
+    ]
+  },
+  {
+    "id": 2,
+    "clientName": "Carlos Pérez",
+    "clientEmail": "carlos@example.com",
+    "date": "2026-09-11",
+    "time": "15:30",
+    "status": "pending",
+    "services": [
+      { "service": 2, "quantity": 1 }
+    ]
+  },
+  {
+    "id": 3,
+    "clientName": "Lucía Fernández",
+    "clientEmail": "lucia@example.com",
+    "date": "2026-09-09",
+    "time": "09:00",
+    "status": "cancelled",
+    "services": [
+      { "service": 1, "quantity": 1 },
+      { "service": 2, "quantity": 1 }
+    ]
+  }
+]
