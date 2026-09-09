@@ -48,7 +48,7 @@ Completá los valores en el `.env` (ver sección de variables de entorno).
 ## 🚀 Cómo Ejecutar
 
 ```bash
-node src/app.js
+node src/server.js
 ```
 
 > Si falta alguna variable de entorno requerida, la aplicación se detiene al iniciar con un mensaje que indica cuál falta. Esto es intencional — preferimos un error explícito al arrancar antes que un comportamiento inesperado en tiempo de ejecución.
@@ -64,7 +64,7 @@ El archivo `.env` debe definir las siguientes variables. Usá `.env.example` com
 | `PORT`       | Puerto en el que corre el servidor       | `8080`        |
 | `NODE_ENV`   | Entorno de ejecución                     | `development` |
 
-> ⚠️ El archivo `.env` **no se sube al repositorio** (está en `.gitignore`). Nunca incluyas credenciales reales en el control de versiones.
+
 
 ---
 

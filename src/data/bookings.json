@@ -7,8 +7,14 @@
     "time": "10:00",
     "status": "confirmed",
     "services": [
-      { "service": 1, "quantity": 2 },
-      { "service": 3, "quantity": 1 }
+      {
+        "service": 1,
+        "quantity": 2
+      },
+      {
+        "service": 2,
+        "quantity": 2
+      }
     ]
   },
   {
@@ -19,7 +25,10 @@
     "time": "15:30",
     "status": "pending",
     "services": [
-      { "service": 2, "quantity": 1 }
+      {
+        "service": 2,
+        "quantity": 1
+      }
     ]
   },
   {
@@ -30,8 +39,28 @@
     "time": "09:00",
     "status": "cancelled",
     "services": [
-      { "service": 1, "quantity": 1 },
-      { "service": 2, "quantity": 1 }
+      {
+        "service": 1,
+        "quantity": 3
+      },
+      {
+        "service": 2,
+        "quantity": 1
+      }
     ]
+  },
+  {
+    "clientName": "Lucía",
+    "clientEmail": "lucia@example.com",
+    "date": "2026-09-12",
+    "time": "11:00",
+    "status": "confirmed",
+    "services": [
+      {
+        "service": 1,
+        "quantity": 1
+      }
+    ],
+    "id": 4
   }
 ]
