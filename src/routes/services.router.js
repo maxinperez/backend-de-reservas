@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import ServiceManager from '../managers/ServiceManager.js';
 import { SERVICES_DATA_PATH } from '../config/env.config.js';
-
+import { c } from '../controllers/services.controller.js';
 /*
 importar controllers, en controller debo llamar a ServiceManager y hacer la logica de negocio, y en router solo debo llamar a los controllers.
 foto en wp.
