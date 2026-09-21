@@ -7,30 +7,7 @@ class ServiceManager {
     this.filePath = filePath;
   }
 
- async getServices() {
-   try{
-    const data = await fs.readFile(this.filePath, 'utf-8');    
-    const services = JSON.parse(data);
-    return services;
-  } 
-    catch(error){
-      console.error('Error cargando servicios.')
-      throw error;
-    }
-  }
 
-  async getServiceById(id) {
-    try{
-      const services = await this.getServices();
-      const service = services.find(service => service.id === parseInt(id));
-  
-      return service ?? null;
-    } catch(error){
-      console.error('Error buscando el servicio.')
-      throw error;
-    }
-
-  }
 
   async addService(serviceData) {
       const requiredFields = ['name', 'description', 'duration', 'price', 'category', 'available'];

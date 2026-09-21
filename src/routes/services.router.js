@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { servicesController } from '../controllers/services.controller.js';
+import { servicesController } from '../controllers/ServicesController.js';
 
 const router = Router();
 
-router.get('/',  servicesController.getServices);
+router.get('/',  servicesController.getAll);//check
 
-router.get('/:id', servicesController.getServicesById);
-    
+router.get('/:id', servicesController.getById);
+
 router.post('/', servicesController.createService);
 
 router.put('/:id', servicesController.updateService);
