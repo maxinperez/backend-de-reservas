@@ -1,18 +1,31 @@
 //manejar la request/response HTTP. Extrae params, llama al service, formatea la respuesta. No tiene lógica de negocio.
-import { ServicesService } from "../services/ServiceService.js";
+import { ServicesService } from "../services/servicesService.js";
 
 export class ServicesController {
     constructor(service = new ServicesService() ) {
         this.service = service;
     }
 
-    getAll = async (req, res, next) => {
-        try {
+    createService = async (req, res, next) => {
+        return this.create(req, res, next);
+    };
 
+    updateService = async (req, res, next) => {
+        return this.update(req, res, next);
+    };
+
+    deleteService = async (req, res, next) => {
+        return this.delete(req, res, next);
+    };
+
+    getAll = async (req, res, next) => {
+         
+        try {
             const filters = req.query;
             const services = await this.service.getAllServices(filters);
             res.status(200).json(services);
         } catch (error) {
+         
             next(error);
         }
     };
@@ -71,11 +84,14 @@ export class ServicesController {
 };
 
 
+export const servicesController = new ServicesController();
+
 export const deleteService = async (req, res, next) => {
+    const controller = new ServicesController();
 
     try {
         const sid = req.params.id;
-        const deletedService = await serviceManager.deleteService(sid);
+        const deletedService = await controller.service.deleteService(sid);
 
         if (deletedService === null) {
             return res.status(404).json({ error: `Servicio con id:${sid} no encontrado` });

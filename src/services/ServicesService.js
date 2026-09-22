@@ -1,13 +1,12 @@
 //lógica de negocio. Valida reglas, calcula IDs, lanza errores de dominio. No conoce HTTP (nada de req/res), no conoce el DAO (solo al repository).
-import { ServiceRepository } from "../repository/ServiceRepository.js";
-
+import { ServicesRepository } from "../repositories/ServicesRepository.js";
 export class ServicesService {
 
-    constructor(repository = new ServiceRepository()) {
+    constructor(repository = new ServicesRepository()) {
         this.repository = repository;
     }
 
-    async getAllServices(filter = {}) {
+    async getAllServices(filters = {}) {
 
         let services = await this.repository.getAllServices();
 

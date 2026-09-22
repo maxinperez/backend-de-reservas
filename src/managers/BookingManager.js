@@ -1,13 +1,11 @@
-import { Utf8Stream } from "node:fs";
 import fs from "node:fs/promises";
-import ServiceManager from "../managers/ServiceManager.js";
 import { SERVICES_DATA_PATH } from "../config/env.config.js";
+import ServiceManager from "../managers/ServiceManager.js";
 
 class BookingManager {
   constructor(filePath) {
-    const serviceManager = new ServiceManager(SERVICES_DATA_PATH);
     this.filePath = filePath;
-    this.serviceManager = serviceManager;
+    this.serviceManager = new ServiceManager();
   }
 
   async getBookings() {

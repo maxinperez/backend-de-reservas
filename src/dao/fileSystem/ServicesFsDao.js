@@ -1,8 +1,6 @@
 //hablar con el archivo JSON. Nada más. No valida reglas de negocio, no conoce HTTP.
 import fs from 'fs/promises';
-import { SERVICES_DATA_PATH } from '../config/env.config.js';
-import { writeFile } from 'fs';
-
+import { SERVICES_DATA_PATH } from '../../config/env.config.js';
 
 export class ServicesFsDao {
 

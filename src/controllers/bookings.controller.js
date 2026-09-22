@@ -45,8 +45,7 @@ export const addServiceToBooking = async (req, res, next) => {
             return res.status(404).json({ error: `Booking con id ${bid} no encontrado` });
         }
 
-        const existingService = updatedBooking.services.find(s => s.service === parseInt(sid));
-        const service = await bookingManager.serviceManager.getServiceById(sid);
+        const service = await bookingManager.serviceManager.getServiceById(parseInt(sid));
 
         if (service === null) {
             return res.status(404).json({ error: `Service con id ${sid} no encontrado` });
@@ -64,4 +63,10 @@ export const addServiceToBooking = async (req, res, next) => {
 
     }
 }
+
+export const bookingsController = {
+    createBooking,
+    getBookingById,
+    addServiceToBooking
+};
 

@@ -1,5 +1,5 @@
 //interfaz uniforme de acceso a datos. Traduce el "lenguaje" del dominio a operaciones del DAO. Si mañana cambiás de JSON a SQL, solo cambiás el DAO y el repository sigue igual.
-import { ServicesFsDao } from "../dao/ServiceDao.js";
+import { ServicesFsDao } from "../dao/fileSystem/ServicesFsDao.js";
 
 export class ServicesRepository{
 
