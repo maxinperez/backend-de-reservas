@@ -1,5 +1,5 @@
 //lógica de negocio. Valida reglas, calcula IDs, lanza errores de dominio. No conoce HTTP (nada de req/res), no conoce el DAO (solo al repository).
-import { ServicesRepository } from "../repositories/ServicesRepository.js";
+import { ServicesRepository } from "../repositories/services.repository.js";
 export class ServicesService {
 
     constructor(repository = new ServicesRepository()) {
@@ -87,7 +87,7 @@ export class ServicesService {
     async updateService(id, updatedData) {
 
         try {
-            const services = await this.getAllServices();
+            const services = await this.repository.getAllServices();
             const old_service_index = services.findIndex(service => service.id === parseInt(id));
 
 
@@ -109,9 +109,9 @@ export class ServicesService {
     }
 
 
-    async deleteService() {
+    async deleteService(id) {
         try {
-            const services = await this.getAllServices();
+            const services = await this.repository.getAllServices();
             const serviceIndex = services.findIndex(s => s.id === parseInt(id));
 
             if (serviceIndex === -1) {

@@ -37,7 +37,7 @@ export class ServicesFsDao {
       return service;
 
     } catch (error) {
-
+      throw error;
     }
   }
 
@@ -51,7 +51,7 @@ export class ServicesFsDao {
       );
     
     } catch (error) {
-
+      throw error;
     }
   }
 

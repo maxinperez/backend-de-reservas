@@ -1,5 +1,5 @@
 //manejar la request/response HTTP. Extrae params, llama al service, formatea la respuesta. No tiene lógica de negocio.
-import { ServicesService } from "../services/servicesService.js";
+import { ServicesService } from "../services/services.service.js";
 
 export class ServicesController {
     constructor(service = new ServicesService() ) {
@@ -36,6 +36,7 @@ export class ServicesController {
             const service = await this.service.getServiceById(parseInt(id));
             res.status(200).json(service);
         } catch (error) {
+            next(error)
 
         }
     }
@@ -57,6 +58,10 @@ export class ServicesController {
             const id = req.params.id;
             const updatedData = req.body;
             const updatedService = await this.service.updateService(id, updatedData);
+
+            if (updatedService === null) {
+                return res.status(404).json({ error: `Servicio con id:${id} no encontrado` });
+            }
             res.status(200).json(updatedService);
 
         } catch (error) {
@@ -83,22 +88,5 @@ export class ServicesController {
 
 };
 
-
 export const servicesController = new ServicesController();
 
-export const deleteService = async (req, res, next) => {
-    const controller = new ServicesController();
-
-    try {
-        const sid = req.params.id;
-        const deletedService = await controller.service.deleteService(sid);
-
-        if (deletedService === null) {
-            return res.status(404).json({ error: `Servicio con id:${sid} no encontrado` });
-        }
-        res.status(200).json({ message: `Servicio con id:${sid} eliminado` });
-
-    } catch (error) {
-        next(error);
-    }
-}
