@@ -96,22 +96,33 @@ Esto habilita el uso de `import`/`export` en todos los archivos `.js` del proyec
 backend-de-reservas/
 ├── src/
 │   ├── config/
-│   │   └── env.config.js          # Validación de variables de entorno al iniciar
+│   │   └── env.config.js
 │   ├── controllers/
-│   │   ├── bookings.controller.js # Lógica de negocio sobre el recurso bookings
-│   │   └── services.controller.js # Lógica de negocio sobre el recurso services
-│   | 
+│   │   ├── bookings.controller.js
+│   │   └── services.controller.js
+│   ├── dao/
+│   │   └── fileSystem/
+│   │       ├── bookings.fs.dao.js
+│   │       └── services.fs.dao.js
 │   ├── data/
-│   │   ├── bookings.json          # Persistencia de las reservas (fuente de verdad)
-│   │   └── service.json           # Persistencia de los servicios (fuente de verdad)
+│   │   ├── bookings.json
+│   │   └── services.json
+│   ├── repositories/
+│   │   ├── bookings.repository.js
+│   │   └── services.repository.js
 │   ├── routes/
-│   │   ├── bookings.router.js     # Definición de endpoints del recurso bookings
-│   │   └── services.router.js     # Definición de endpoints del recurso services
-│   ├── app.js                     # Configuración de la app de Express (middlewares, routers)
-│   └── server.js                  # Punto de entrada: levanta el servidor.
-├── .env.example                   # Plantilla de variables de entorno
+│   │   ├── bookings.router.js
+│   │   └── services.router.js
+│   ├── services/
+│   │   ├── bookings.service.js
+│   │   └── services.service.js
+│   ├── app.js
+│   └── server.js
+├── .env                  # Local; no debe incluirse en Git
+├── .env.example
 ├── .gitignore
 ├── package.json
+├── package-lock.json
 └── README.md
 ```
 ---
