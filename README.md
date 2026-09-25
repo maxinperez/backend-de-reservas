@@ -100,9 +100,7 @@ backend-de-reservas/
 │   ├── controllers/
 │   │   ├── bookings.controller.js # Lógica de negocio sobre el recurso bookings
 │   │   └── services.controller.js # Lógica de negocio sobre el recurso services
-│   ├── managers/
-│   │   ├── BookingManager.js      # Acceso a datos (CRUD) sobre bookings.json
-│   │   └── ServiceManager.js      # Acceso a datos (CRUD) sobre service.json
+│   | 
 │   ├── data/
 │   │   ├── bookings.json          # Persistencia de las reservas (fuente de verdad)
 │   │   └── service.json           # Persistencia de los servicios (fuente de verdad)
