@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import { BOOKINGS_DATA_PATH } from '../../config/env.config.js';
+//import { BOOKINGS_DATA_PATH } from '../../config/env.config.js';
 
 export class BookingsFsDao {
 
