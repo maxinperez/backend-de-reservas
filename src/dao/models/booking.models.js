@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { type } from "os";
 
-const serviceSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
     clientName: {
         type: String,
         required: true
@@ -24,7 +25,6 @@ const serviceSchema = new mongoose.Schema({
     },
     services: [{
         service: {
-            
             type: mongoose.Schema.Types.ObjectId,
             ref: 'services'//fk?
         },
@@ -34,7 +34,15 @@ const serviceSchema = new mongoose.Schema({
         }
     }]
 
-})
+},
+    {
+        timestamps: true
+    }
+)
+
+
+export const BookingModel = mongoose.model('bookings', bookingSchema);
+
 
 /*
 {

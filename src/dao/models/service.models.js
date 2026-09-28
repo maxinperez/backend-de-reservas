@@ -27,7 +27,10 @@ const serviceSchema = new mongoose.Schema({
         required: true
     }
 
-})
+},
+    {
+        timestamps: true
+    })
 
 export const ServiceModel = mongoose.model('services', serviceSchema);
 /* {
