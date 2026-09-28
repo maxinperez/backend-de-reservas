@@ -29,7 +29,7 @@ const serviceSchema = new mongoose.Schema({
 
 })
 
-
+export const ServiceModel = mongoose.model('services', serviceSchema);
 /* {
     "id": 1,
     "name": "Corte de cabello",
