@@ -1,27 +1,31 @@
 //interfaz uniforme de acceso a datos. Traduce el "lenguaje" del dominio a operaciones del DAO. Si mañana cambiás de JSON a SQL, solo cambiás el DAO y el repository sigue igual.
-import { ServicesFsDao } from "../dao/fileSystem/services.fs.dao.js";
+import { ServicesMongoDao } from "../dao/mongo/services.mongo.dao.js";
 
 export class ServicesRepository{
 
 
-    constructor(dao = new ServicesFsDao()) {
-    this.dao = dao; 
+    constructor(dao = new ServicesMongoDao()) {
+    this.dao = dao;
   }
 
-  getAllServices() {
-    return this.dao.getAll();
+  getAllServices(filterQuery) {
+    return this.dao.getAll(filterQuery);
   }
 
   getServiceById(id) {
     return this.dao.getById(id);
   }
 
-  saveService(service){
-    return this.dao.create(service);
+  createService(data){
+    return this.dao.create(data);
   }
 
-  saveAllServices(services) {
-    return this.dao.saveAll(services);
+  updateService(id, data) {
+    return this.dao.updateById(id, data);
+  }
+
+  deleteService(id) {
+    return this.dao.deleteById(id);
   }
 
 }

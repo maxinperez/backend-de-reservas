@@ -1,25 +1,29 @@
-import { BookingsFsDao } from "../dao/fileSystem/bookings.fs.dao.js";
+import { BookingsMongoDao } from "../dao/mongo/bookings.mongo.dao.js";
 
 export class BookingsRepository {
 
-    constructor(dao = new BookingsFsDao()) {
+    constructor(dao = new BookingsMongoDao()) {
         this.dao = dao;
     }
 
-    getAllBookings() {
-        return this.dao.getAll();
+    getAllBookings(filterQuery) {
+        return this.dao.getAll(filterQuery);
     }
 
     getBookingById(id) {
         return this.dao.getById(id);
     }
 
-    saveBooking(booking) {
-        return this.dao.create(booking);
+    createBooking(data) {
+        return this.dao.create(data);
     }
 
-    saveAllBookings(bookings) {
-        return this.dao.saveAll(bookings);
+    updateBooking(id, data) {
+        return this.dao.updateById(id, data);
+    }
+
+    deleteBooking(id) {
+        return this.dao.deleteById(id);
     }
 
 }

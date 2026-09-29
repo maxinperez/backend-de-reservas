@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { type } from "os";
 
 const bookingSchema = new mongoose.Schema({
     clientName: {
@@ -15,7 +14,7 @@ const bookingSchema = new mongoose.Schema({
         required: true
     },
     time: {
-        type: Date,
+        type: String,
         required: true
     },
     status: {

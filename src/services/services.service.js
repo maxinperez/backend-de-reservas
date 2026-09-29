@@ -1,5 +1,10 @@
 //lógica de negocio. Valida reglas, calcula IDs, lanza errores de dominio. No conoce HTTP (nada de req/res), no conoce el DAO (solo al repository).
 import { ServicesRepository } from "../repositories/services.repository.js";
+
+function escapeRegex(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 export class ServicesService {
 
     constructor(repository = new ServicesRepository()) {
@@ -8,9 +13,8 @@ export class ServicesService {
 
     async getAllServices(filters = {}) {
 
-        let services = await this.repository.getAllServices();
-
         const { duration, price, category, available } = filters;
+        const filterQuery = {};
 
         if (duration) {
             const durationNumber = parseInt(duration, 10);
@@ -19,7 +23,7 @@ export class ServicesService {
                 error.status = 400;
                 throw error;
             }
-            services = services.filter(s => s.duration === durationNumber);
+            filterQuery.duration = durationNumber;
         }
 
         if (price) {
@@ -29,13 +33,11 @@ export class ServicesService {
                 error.status = 400;
                 throw error;
             }
-            services = services.filter(s => s.price === priceNumber);
+            filterQuery.price = priceNumber;
         }
 
         if (category) {
-            services = services.filter(
-                s => s.category.toLowerCase() === category.toLowerCase()
-            );
+            filterQuery.category = new RegExp(`^${escapeRegex(category)}$`, 'i');
         }
 
         if (available !== undefined) {
@@ -44,11 +46,10 @@ export class ServicesService {
                 error.status = 400;
                 throw error;
             }
-            const isAvailable = available === 'true';
-            services = services.filter(s => s.available === isAvailable);
+            filterQuery.available = available === 'true';
         }
 
-        return services;
+        return this.repository.getAllServices(filterQuery);
     }
 
     async getServiceById(id) {
@@ -73,33 +74,14 @@ export class ServicesService {
             }
         }
 
-        const services = await this.repository.getAllServices();
-        const newId = this.getNextId(services);
-
-        const newService = { ...serviceData, id: newId };
-        services.push(newService);
-        await this.repository.saveAllServices(services);
-        return newService;
-
+        return this.repository.createService(serviceData);
     }
 
 
     async updateService(id, updatedData) {
 
         try {
-            const services = await this.repository.getAllServices();
-            const old_service_index = services.findIndex(service => service.id === parseInt(id));
-
-
-            if (old_service_index === -1) {
-                return null;
-            }
-
-            const updateService = { ...services[old_service_index], ...updatedData, id: services[old_service_index].id };
-            services[old_service_index] = updateService;
-            await this.repository.saveAllServices(services);
-            return updateService;
-
+            return await this.repository.updateService(id, updatedData);
 
         } catch (error) {
             console.error('Error actualizando el servicio.', error.message);
@@ -111,18 +93,7 @@ export class ServicesService {
 
     async deleteService(id) {
         try {
-            const services = await this.repository.getAllServices();
-            const serviceIndex = services.findIndex(s => s.id === parseInt(id));
-
-            if (serviceIndex === -1) {
-                return null;
-            }
-
-            const deletedService = services.splice(serviceIndex, 1)[0];
-            //aqui termina el manejo del arreglo y entra en juego el repository
-            await this.repository.saveAllServices(services);
-
-            return deletedService;
+            return await this.repository.deleteService(id);
 
         }
 
@@ -131,11 +102,5 @@ export class ServicesService {
             throw error;
 
         }
-    }
-
-    getNextId(services) {
-        if (services.length === 0) return 1;
-        const maxId = Math.max(...services.map(s => s.id));
-        return maxId + 1
     }
 }

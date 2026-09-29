@@ -33,7 +33,7 @@ export class ServicesController {
     getById = async (req, res, next) => {
         try {
             const id = req.params.id;
-            const service = await this.service.getServiceById(parseInt(id));
+            const service = await this.service.getServiceById(id);
             res.status(200).json(service);
         } catch (error) {
             next(error)
