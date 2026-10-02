@@ -23,7 +23,7 @@ La configuración del entorno se valida al iniciar la aplicación: si falta algu
 
 - **Node.js** con ES Modules (`import`/`export`)
 - **dotenv** — gestión de variables de entorno
-- **fs/promises** — lectura y escritura de archivos de forma asíncrona (no bloqueante)
+- **Mongo Atlas** — base de datos en la nube.
 
 ---
 
@@ -70,8 +70,7 @@ El archivo `.env` debe definir las siguientes variables. Usá `.env.example` com
 |------------------------|-------------------------------------------------|-----------------------------------|
 | `PORT`                 | Puerto en el que corre el servidor.              | `8080`                            |
 | `NODE_ENV`             | Entorno de ejecución.                            | `development`                     |
-| `SERVICES_DATA_PATH`   | Ruta al JSON donde se persisten los services.   | `./src/data/service.json`      |
-| `BOOKINGS_DATA_PATH`   | Ruta al JSON donde se persisten las reservas.   | `./src/data/bookings.json`     |
+| `MONGO_URI`            | URI de conexión a MongoDB Atlas.                | `mongodb+srv://usuario:'
 
 
 ---
@@ -96,14 +95,22 @@ Esto habilita el uso de `import`/`export` en todos los archivos `.js` del proyec
 backend-de-reservas/
 ├── src/
 │   ├── config/
+│   │   ├── database.config.js
 │   │   └── env.config.js
 │   ├── controllers/
 │   │   ├── bookings.controller.js
 │   │   └── services.controller.js
 │   ├── dao/
-│   │   └── fileSystem/
-│   │       ├── bookings.fs.dao.js
-│   │       └── services.fs.dao.js
+│   │   ├── fileSystem/
+│   │   │   ├── bookings.fs.dao.js
+│   │   │   └── services.fs.dao.js
+│   │   ├── models/
+│   │   │   ├── booking.models.js
+│   │   │   ├── message.models.js
+│   │   │   └── service.models.js
+│   │   └── mongo/
+│   │       ├── bookings.mongo.dao.js
+│   │       └── services.mongo.dao.js
 │   ├── data/
 │   │   ├── bookings.json
 │   │   └── services.json
@@ -118,6 +125,9 @@ backend-de-reservas/
 │   │   └── services.service.js
 │   ├── app.js
 │   └── server.js
+├── test/
+│   ├── bookings.test.js
+│   └── services.test.js
 ├── .env                  # Local; no debe incluirse en Git
 ├── .env.example
 ├── .gitignore
