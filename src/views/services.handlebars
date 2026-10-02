@@ -1,0 +1,12 @@
+<h1>Servicios</h1>
+
+<ul>
+  {{#each services}}
+    <li>
+      <strong>{{this.name}}</strong> - {{this.category}}
+      ({{this.duration}} min) - ${{this.price}}
+    </li>
+  {{else}}
+    <li>No hay servicios cargados.</li>
+  {{/each}}
+</ul>
