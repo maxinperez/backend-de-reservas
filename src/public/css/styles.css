@@ -1,0 +1,111 @@
+/* Sistema de Turnos - estilos base.
+   Los colores y medidas viven en variables para reutilizarlos en vistas nuevas. */
+
+:root {
+  --color-bg: #f1f6fc;
+  --color-surface: #ffffff;
+  --color-text: #2c3e55;
+  --color-text-soft: #5f7391;
+  --color-primary: #5b8fd6;
+  --color-primary-dark: #3f6fb3;
+  --color-border: #d9e5f4;
+  --color-accent-bg: #e6f0fb;
+
+  --radius: 12px;
+  --shadow: 0 2px 10px rgba(63, 111, 179, 0.1);
+  --font-base: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2.5rem 1rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Contenedor central: el contenido de cada vista queda en una columna legible */
+body > h1,
+body > ul {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--color-primary);
+  color: var(--color-primary-dark);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 0.9rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 5px solid var(--color-primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--color-text-soft);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(63, 111, 179, 0.16);
+}
+
+li strong {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Mensaje cuando no hay datos cargados */
+.empty-message {
+  background: var(--color-accent-bg);
+  border-left-color: var(--color-border);
+  box-shadow: none;
+  color: var(--color-text-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+.empty-message:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1.5rem 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  li {
+    padding: 0.85rem 1rem;
+  }
+}
