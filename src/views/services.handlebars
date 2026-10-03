@@ -1,13 +1,13 @@
 <h1>Servicios</h1>
 
-<ul>
+<ul id="services-list">
   {{#each services}}
-    <li>
+    <li >
       <strong>{{this.name}}</strong> - {{this.category}}
       ({{this.duration}} min) - ${{this.price}} - {{this.description}}
       {{#if this.available}}Disponible{{else}}No disponible{{/if}}
     </li>
   {{else}}
-    <li>No hay servicios cargados.</li>
+    <li class="empty-message">No hay servicios cargados.</li>
   {{/each}}
 </ul>

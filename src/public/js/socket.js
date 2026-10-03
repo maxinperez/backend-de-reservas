@@ -5,7 +5,7 @@ const servicesList = document.getElementById('services-list');
 socket.on('newService', (service) => {
   if (!servicesList) return;
 
-  // quita el mensaje "No hay servicios cargados" si era el único elemento
+ 
   const emptyMessage = servicesList.querySelector('.empty-message');
   if (emptyMessage) emptyMessage.remove();
 
