@@ -99,11 +99,9 @@ backend-de-reservas/
 │   │   └── env.config.js
 │   ├── controllers/
 │   │   ├── bookings.controller.js
-│   │   └── services.controller.js
+│   │   ├── services.controller.js
+│   │   └── views.controller.js
 │   ├── dao/
-│   │   ├── fileSystem/
-│   │   │   ├── bookings.fs.dao.js
-│   │   │   └── services.fs.dao.js
 │   │   ├── models/
 │   │   │   ├── booking.models.js
 │   │   │   ├── message.models.js
@@ -114,15 +112,26 @@ backend-de-reservas/
 │   ├── data/
 │   │   ├── bookings.json
 │   │   └── services.json
+│   ├── public/
+│   │   ├── css/
+│   │   │   └── styles.css
+│   │   └── js/
+│   │       └── socket.js
 │   ├── repositories/
 │   │   ├── bookings.repository.js
 │   │   └── services.repository.js
 │   ├── routes/
 │   │   ├── bookings.router.js
-│   │   └── services.router.js
+│   │   ├── services.router.js
+│   │   └── views.router.js
 │   ├── services/
 │   │   ├── bookings.service.js
 │   │   └── services.service.js
+│   ├── views/
+│   │   ├── layouts/
+│   │   │   └── main.handlebars
+│   │   ├── bookings.handlebars
+│   │   └── services.handlebars
 │   ├── app.js
 │   └── server.js
 ├── test/
