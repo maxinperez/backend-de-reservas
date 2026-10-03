@@ -6,7 +6,7 @@ import { Server } from 'socket.io';
 
 const httpServer = createServer(app);
 const io = new Server(httpServer);
-
+app.set('io', io);
 io.on('connection', (socket) => {
   console.log('Cliente conectado');
   socket.on('disconnect', () => {

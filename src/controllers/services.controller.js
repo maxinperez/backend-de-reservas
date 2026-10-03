@@ -44,6 +44,7 @@ export class ServicesController {
     create = async (req, res, next) => {
         try {
             const newService = await this.service.createService(req.body);
+            req.app.get('io').emit('newService', newService);
             res.status(201).json(newService);
         } catch (error) {
             next(error);

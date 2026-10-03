@@ -4,7 +4,8 @@
   {{#each services}}
     <li>
       <strong>{{this.name}}</strong> - {{this.category}}
-      ({{this.duration}} min) - ${{this.price}}
+      ({{this.duration}} min) - ${{this.price}} - {{this.description}}
+      {{#if this.available}}Disponible{{else}}No disponible{{/if}}
     </li>
   {{else}}
     <li>No hay servicios cargados.</li>

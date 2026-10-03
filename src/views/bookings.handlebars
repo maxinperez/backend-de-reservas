@@ -1,0 +1,14 @@
+<h1>Reservas</h1>
+
+<ul>
+  {{#each bookings}}
+    <li>
+      <strong>{{this.clientName}}</strong> - {{this.clientEmail}}
+      ({{this.date}} ) - {{this.time}} -
+      {{#if this.status}}Confirmada{{else}}No confirmada{{/if}}
+        
+    </li>
+  {{else}}
+    <li>No hay reservas cargadas.</li>
+  {{/each}}
+</ul>

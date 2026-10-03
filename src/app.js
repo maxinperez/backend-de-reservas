@@ -6,19 +6,16 @@ import { engine } from 'express-handlebars';
 
 export const app = express();
 app.use(express.json());
+app.use('/api/services', servicesRouter);
+app.use('/api/bookings', bookingsRouter);
+app.use('/views', viewsRouter);
+app.use(express.static('./src/public'));
 
 
 //handlebars config
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
-app.use('/', viewsRouter) 
-
-
-
-//routes
-app.use('/api/services', servicesRouter);
-app.use('/api/bookings', bookingsRouter);
 
 //manage errors
 app.use((err, req, res, next) => {
