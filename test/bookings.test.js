@@ -44,6 +44,8 @@ async function createBooking(overrides = {}) {
 }
 
 before(async () => {
+  // server.js es quien crea el io real; en los tests se reemplaza por uno que no hace nada
+  app.set("io", { emit: () => {} });
   await connectDB();
 });
 

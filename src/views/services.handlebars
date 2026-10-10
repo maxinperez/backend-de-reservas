@@ -11,3 +11,11 @@
     <li class="empty-message">No hay servicios cargados.</li>
   {{/each}}
 </ul>
+
+{{#if totalPages}}
+<nav class="pagination">
+  {{#if hasPrevPage}}<a href="{{prevUrl}}">&laquo; Anterior</a>{{/if}}
+  <span>Página {{page}} de {{totalPages}}</span>
+  {{#if hasNextPage}}<a href="{{nextUrl}}">Siguiente &raquo;</a>{{/if}}
+</nav>
+{{/if}}

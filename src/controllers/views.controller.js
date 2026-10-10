@@ -14,9 +14,22 @@ export class ViewsController {
     getServices = async (req, res, next) => {
         try {
             const { payload, ...pagination } = await this.servicesService.getAllServices(req.query);
+
+            // conserva los filtros activos (category, limit, sortBy...) y solo cambia la página
+            const buildUrl = (targetPage) => {
+                const params = new URLSearchParams(req.query);
+                params.set('page', targetPage);
+                return `${req.baseUrl}${req.path}?${params}`;
+            };
+
+            const { page, totalPages, hasPrevPage, hasNextPage } = pagination;
+
             res.render('services', {
                 services: payload.map(s => s.toObject()),
                 ...pagination,
+                // si piden una página más allá del final, "Anterior" vuelve a la última real
+                prevUrl: hasPrevPage ? buildUrl(Math.min(page - 1, totalPages)) : null,
+                nextUrl: hasNextPage ? buildUrl(page + 1) : null,
             });
         } catch (error) {
             next(error);
