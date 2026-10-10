@@ -49,6 +49,8 @@ export class ServicesService {
             filterQuery.available = available === 'true';
         }
 
+        
+
         return this.repository.getAllServices(filterQuery);
     }
 
