@@ -8,8 +8,8 @@ export class ServicesRepository{
     this.dao = dao;
   }
 
-  getAllServices(filterQuery) {
-    return this.dao.getAll(filterQuery);
+  getAllServices(filterQuery, options) {
+    return this.dao.getAll(filterQuery, options);
   }
 
   getServiceById(id) {

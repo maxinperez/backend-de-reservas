@@ -4,8 +4,16 @@ import { ServiceModel } from "../models/service.models.js";
 
 export class ServicesMongoDao {
 
-  async getAll(filterQuery = {}) {
-    return ServiceModel.find(filterQuery);
+  async getAll(filterQuery = {}, { page = 1, limit = 10, sort = { createdAt: 1 } } = {}) {
+    const skip = (page - 1) * limit;
+
+    // _id como desempate: mantiene estable el orden entre páginas cuando el campo de orden se repite
+    const [docs, total] = await Promise.all([
+      ServiceModel.find(filterQuery).sort({ ...sort, _id: 1 }).skip(skip).limit(limit),
+      ServiceModel.countDocuments(filterQuery),
+    ]);
+
+    return { docs, total };
   }
 
   async getById(id) {

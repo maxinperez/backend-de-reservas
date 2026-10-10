@@ -13,8 +13,11 @@ export class ViewsController {
 
     getServices = async (req, res, next) => {
         try {
-            const services = await this.servicesService.getAllServices();
-            res.render('services', { services: services.map(s => s.toObject()) });
+            const { payload, ...pagination } = await this.servicesService.getAllServices(req.query);
+            res.render('services', {
+                services: payload.map(s => s.toObject()),
+                ...pagination,
+            });
         } catch (error) {
             next(error);
         }
