@@ -149,19 +149,19 @@ test("POST /api/bookings/:bid/services/:sid con booking inexistente devuelve 404
   assert.equal(res.status, 404);
 });
 
-test("POST /api/bookings/:bid/services/:sid con ids malformados devuelve 404", async () => {
+test("POST /api/bookings/:bid/services/:sid con ids malformados devuelve 400", async () => {
   const booking = await createBooking();
   const service = await createService({ available: true });
 
   const badBid = await request.post(
     `/api/bookings/no-es-un-id/services/${service._id}`
   );
-  assert.equal(badBid.status, 404);
+  assert.equal(badBid.status, 400);
 
   const badSid = await request.post(
     `/api/bookings/${booking._id}/services/no-es-un-id`
   );
-  assert.equal(badSid.status, 404);
+  assert.equal(badSid.status, 400);
 });
 
 test("GET /api/bookings/:bid devuelve los servicios completos (populate)", async () => {

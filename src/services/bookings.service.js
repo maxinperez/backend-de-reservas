@@ -28,32 +28,12 @@ export class BookingsService {
     }
 
     async createBooking(bookingData){
-        const requiredFields = [
-              "clientName",
-              "clientEmail",
-              "date",
-              "time",
-              "status",
-            ];
-
-            for (const field of requiredFields) {
-              if (!(field in bookingData)) {
-                const error = new Error(`Booking incompleto, falta el campo: ${field}`);
-                error.status = 400;
-                throw error;
-              }
-            }
-
-            if (!("services" in bookingData)) {
-              bookingData.services = [];
-            }
-
-            try {
-              return await this.repository.createBooking(bookingData);
-            } catch (error) {
-              console.error("Error agregando el booking.", error.message);
-              throw error;
-            }
+        try {
+          return await this.repository.createBooking(bookingData);
+        } catch (error) {
+          console.error("Error agregando el booking.", error.message);
+          throw error;
+        }
     }
 
      async addServiceToBooking(bid, sid) {

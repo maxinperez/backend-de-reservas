@@ -118,15 +118,6 @@ export class ServicesService {
     }
 
     async createService(serviceData) {
-        const requiredFields = ['name', 'description', 'duration', 'price', 'category', 'available'];
-        for (const field of requiredFields) {
-            if (!(field in serviceData)) {
-                const error = new Error(`Service incompleto, falta el campo: ${field}`);
-                error.status = 400;
-                throw error;
-            }
-        }
-
         return this.repository.createService(serviceData);
     }
 

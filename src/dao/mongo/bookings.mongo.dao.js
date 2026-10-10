@@ -9,7 +9,7 @@ export class BookingsMongoDao {
     return BookingModel.find(filterQuery);
   }
 
-  // populate es solo para consultar: reemplaza cada referencia por el servicio completo en la respuesta, no en la base
+  // populate es solo para consultar: reemplaza cada referencia por el servicio completo en la respuesta, no en mongo
   async getById(id, { populate = false } = {}) {
     try {
       const query = BookingModel.findById(id);
