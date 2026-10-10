@@ -20,7 +20,8 @@ export class BookingsService {
 
     async getBookingById(bid) {
         try {
-            return await this.repository.getBookingById(bid);
+            // la consulta devuelve los servicios completos; addServiceToBooking, en cambio, trabaja con las referencias
+            return await this.repository.getBookingById(bid, { populate: true });
         } catch (error) {
             console.error("Error buscando el booking.");
             throw error;

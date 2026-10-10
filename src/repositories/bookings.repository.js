@@ -10,8 +10,8 @@ export class BookingsRepository {
         return this.dao.getAll(filterQuery);
     }
 
-    getBookingById(id) {
-        return this.dao.getById(id);
+    getBookingById(id, options) {
+        return this.dao.getById(id, options);
     }
 
     createBooking(data) {

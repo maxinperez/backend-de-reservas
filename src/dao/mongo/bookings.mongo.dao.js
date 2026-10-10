@@ -1,6 +1,7 @@
 //hablar con MongoDB a través de Mongoose. Nada más. No valida reglas de negocio, no conoce HTTP.
 import mongoose from "mongoose";
 import { BookingModel } from "../models/booking.models.js";
+import { ServiceModel } from "../models/service.models.js";
 
 export class BookingsMongoDao {
 
@@ -8,9 +9,14 @@ export class BookingsMongoDao {
     return BookingModel.find(filterQuery);
   }
 
-  async getById(id) {
+  // populate es solo para consultar: reemplaza cada referencia por el servicio completo en la respuesta, no en la base
+  async getById(id, { populate = false } = {}) {
     try {
-      return await BookingModel.findById(id);
+      const query = BookingModel.findById(id);
+      if (populate) {
+        query.populate({ path: 'services.service', model: ServiceModel });
+      }
+      return await query;
     } catch (error) {
       if (error instanceof mongoose.Error.CastError) return null;
       throw error;

@@ -163,3 +163,56 @@ test("POST /api/bookings/:bid/services/:sid con ids malformados devuelve 404", a
   );
   assert.equal(badSid.status, 404);
 });
+
+test("GET /api/bookings/:bid devuelve los servicios completos (populate)", async () => {
+  const booking = await createBooking();
+  const service = await createService({ name: "Servicio populate", price: 5000 });
+  await request.post(`/api/bookings/${booking._id}/services/${service._id}`);
+
+  const res = await request.get(`/api/bookings/${booking._id}`);
+  assert.equal(res.status, 200);
+
+  // datos de la reserva
+  assert.equal(res.body.clientName, validBooking.clientName);
+  assert.equal(res.body.clientEmail, validBooking.clientEmail);
+  assert.equal(res.body.time, validBooking.time);
+  assert.equal(res.body.status, validBooking.status);
+
+  // datos completos del servicio asociado, no solo su id
+  assert.equal(res.body.services.length, 1);
+  assert.equal(res.body.services[0].quantity, 1);
+  assert.equal(res.body.services[0].service._id, service._id);
+  assert.equal(res.body.services[0].service.name, "Servicio populate");
+  assert.equal(res.body.services[0].service.price, 5000);
+  assert.equal(res.body.services[0].service.category, service.category);
+});
+
+test("populate no guarda el servicio completo: en la base queda solo la referencia", async () => {
+  const booking = await createBooking();
+  const service = await createService();
+  await request.post(`/api/bookings/${booking._id}/services/${service._id}`);
+  await request.get(`/api/bookings/${booking._id}`);
+
+  const stored = await BookingModel.findById(booking._id).lean();
+  const ref = stored.services[0].service;
+  assert.ok(ref instanceof mongoose.Types.ObjectId);
+  assert.equal(ref.toString(), service._id);
+});
+
+test("GET /api/bookings (listado) sigue devolviendo solo los ids de los servicios", async () => {
+  const booking = await createBooking();
+  const service = await createService();
+  await request.post(`/api/bookings/${booking._id}/services/${service._id}`);
+
+  const res = await request.get("/api/bookings");
+  const found = res.body.find((b) => b._id === booking._id);
+  assert.equal(found.services[0].service, service._id);
+});
+
+test("GET /api/bookings/:bid de una reserva sin servicios devuelve services vacío", async () => {
+  const booking = await createBooking();
+
+  const res = await request.get(`/api/bookings/${booking._id}`);
+  assert.equal(res.status, 200);
+  assert.deepEqual(res.body.services, []);
+});
