@@ -20,7 +20,7 @@ El proyecto implementa un backend con **Node.js** y **Express** para la gestión
 - **DAO (Mongo)**: único lugar donde se habla con MongoDB a través de los modelos de Mongoose.
 - **Models**: schemas y modelos de Mongoose (`services`, `bookings`).
 
-Esta separación permite que cada capa tenga una única responsabilidad: por ejemplo, la migración de archivos JSON a MongoDB solo requirió cambiar el DAO, sin tocar la lógica de negocio.
+Esta separación permite que cada capa tenga una única responsabilidad: por ejemplo, solo el DAO conoce Mongoose, así que cambiar la forma de persistir afecta a esa capa y no a los controllers ni a las rutas.
 
 La configuración del entorno se valida al iniciar la aplicación: si falta alguna variable requerida, la app falla con un mensaje claro antes de ejecutar cualquier lógica de negocio.
 
@@ -45,6 +45,8 @@ La configuración del entorno se valida al iniciar la aplicación: si falta algu
 ---
 
 ## 📦 Instalación
+
+**Requisitos:** Node.js 22.22.2 o superior y una base de MongoDB Atlas.
 
 1. Cloná el repositorio:
 
@@ -79,7 +81,7 @@ npm test        # corre los tests de los endpoints y las vistas
 
 El servidor queda disponible en `http://localhost:<PORT>`.
 
-> Los tests usan la base de datos configurada en `MONGO_URI`: crean sus propios datos con una categoría única y los eliminan al terminar.
+> Los tests usan la base de datos configurada en `MONGO_URI`: crean sus propios datos y los eliminan al terminar.
 
 > Si falta alguna variable de entorno requerida, la aplicación se detiene al iniciar con un mensaje que indica cuál falta. Esto es intencional — preferimos un error explícito al arrancar antes que un comportamiento inesperado en tiempo de ejecución.
 
@@ -115,7 +117,7 @@ Esto habilita el uso de `import`/`export` en todos los archivos `.js` del proyec
 
 ## 📡 API REST
 
-Todos los endpoints cuelgan de `/api`. Los errores siempre responden con el formato `{ "error": "mensaje" }`.
+Todos los endpoints cuelgan de `/api`. Los errores de estos endpoints responden con el formato `{ "error": "mensaje" }`.
 
 ### Endpoints
 
