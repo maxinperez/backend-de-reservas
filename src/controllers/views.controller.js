@@ -39,7 +39,16 @@ export class ViewsController {
     getBookings = async (req, res, next) => {
         try {
             const bookings = await this.bookingsService.getBookings();
-            res.render('bookings', { bookings: bookings.map(b => b.toObject()) });
+            res.render('bookings', {
+                bookings: bookings.map(b => {
+                    const booking = b.toObject();
+                    // la fecha se guarda como medianoche UTC; formatearla en hora local la corre al día anterior
+                    return {
+                        ...booking,
+                        date: booking.date.toLocaleDateString('es-AR', { timeZone: 'UTC' }),
+                    };
+                }),
+            });
         } catch (error) {
             next(error);
         }

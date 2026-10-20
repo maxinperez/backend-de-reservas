@@ -5,12 +5,14 @@ import supertest from "supertest";
 import { connectDB } from "../src/config/database.config.js";
 import { app } from "../src/app.js";
 import { ServiceModel } from "../src/dao/models/service.models.js";
+import { BookingModel } from "../src/dao/models/booking.models.js";
 
 const request = supertest(app);
 
 // categoría única por corrida: aísla los tests del resto de los servicios que haya en Atlas
 const uniqueCategory = `test-views-${Date.now()}`;
 const createdIds = [];
+const createdBookingIds = [];
 
 async function createService(name, price) {
   const res = await request.post("/api/services").send({
@@ -45,6 +47,7 @@ before(async () => {
 
 after(async () => {
   await ServiceModel.deleteMany({ _id: { $in: createdIds } });
+  await BookingModel.deleteMany({ _id: { $in: createdBookingIds } });
   await mongoose.connection.close();
 });
 
@@ -98,4 +101,20 @@ test("GET /views/bookings responde 200", async () => {
   const res = await request.get("/views/bookings");
   assert.equal(res.status, 200);
   assert.match(res.headers["content-type"], /text\/html/);
+});
+
+test("GET /views/bookings muestra la fecha de la reserva sin correrla por la zona horaria", async () => {
+  const res = await request.post("/api/bookings").send({
+    clientName: "Cliente vista",
+    clientEmail: "vista@example.com",
+    date: "2026-11-05",
+    time: "15:30",
+    status: "pending",
+  });
+  createdBookingIds.push(res.body._id);
+
+  const view = await request.get("/views/bookings");
+  assert.equal(view.status, 200);
+  assert.ok(view.text.includes("5/11/2026"));
+  assert.ok(!view.text.includes("GMT"));
 });
